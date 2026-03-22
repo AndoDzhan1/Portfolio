@@ -1,0 +1,457 @@
+@import "tailwindcss";
+
+/* ============================================================
+   ГЛОБАЛЬНЫЕ СТИЛИ ПОРТФОЛИО
+   Стиль: BMW M Performance (Red / Black / White)
+   ============================================================ */
+
+:root {
+  /* Светлая тема (по умолчанию) */
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --primary: #dc143c;        /* BMW M Red */
+  --primary-dark: #b90e3a;
+  --primary-light: #ff1a47;
+  --accent: #1a1a1a;
+  --gray-50: #f8f9fa;
+  --gray-100: #f1f3f5;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #868e96;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+  --gray-900: #212529;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
+}
+
+/* Тёмная тема */
+html.dark {
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --gray-50: #1a1a1a;
+  --gray-100: #242526;
+  --gray-200: #3a3b3c;
+  --gray-300: #4e4f50;
+  --gray-400: #65676b;
+  --gray-500: #8a8d91;
+  --gray-600: #b0b3b8;
+  --gray-700: #dadbdc;
+  --gray-800: #e4e6eb;
+  --gray-900: #f0f2f5;
+}
+
+html.light {
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+}
+
+/* ============================================================
+   Базовые стили
+   ============================================================ */
+
+* {
+  font-family: 'Helvetica', 'Arial', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Плавный скролл */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Убираем скачок при скролле */
+body:has(header) {
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   Кастомный скроллбар (BMW Style)
+   ============================================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-100);
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--gray-100);
+}
+
+html.dark ::-webkit-scrollbar-corner {
+  background: #1a1a1a;
+}
+
+/* ============================================================
+   Анимации
+   ============================================================ */
+
+/* Blob анимация для фона */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Плавное появление */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Появление слева */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.6s ease-out forwards;
+}
+
+/* Появление справа */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+/* Появление снизу */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.6s ease-out forwards;
+}
+
+/* Выпадающее меню */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+/* Пульсация */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Градиент BMW M */
+@keyframes bmwGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-bmw-gradient {
+  background: linear-gradient(-45deg, #dc143c, #0a0a0a, #1a1a1a, #dc143c);
+  background-size: 400% 400%;
+  animation: bmwGradient 15s ease infinite;
+}
+
+/* Поток M-полосы */
+@keyframes bmwFlow {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-bmw-flow {
+  animation: bmwFlow 3s linear infinite;
+}
+
+/* Свечение */
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(220, 20, 60, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(220, 20, 60, 0.6);
+  }
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Парение */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Вращение */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* Масштабирование */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+/* Мерцание */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 1000px 100%;
+}
+
+/* ============================================================
+   Утилиты
+   ============================================================ */
+
+/* Обрезка текста до нескольких строк */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Градиентный текст BMW */
+.text-gradient-bmw {
+  background: linear-gradient(135deg, #dc143c 0%, #0a0a0a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Премиальная тень */
+.shadow-premium {
+  box-shadow: 0 25px 50px -12px rgba(220, 20, 60, 0.15);
+}
+
+.shadow-premium-lg {
+  box-shadow: 0 35px 60px -15px rgba(220, 20, 60, 0.2);
+}
+
+/* BMW M полоса */
+.bmw-m-stripe {
+  background: linear-gradient(90deg,
+    #2f6feb 0%, #2f6feb 33%,
+    #dc143c 33%, #dc143c 66%,
+    #1a1a1a 66%, #1a1a1a 100%
+  );
+}
+
+.bmw-m-stripe-vertical {
+  background: linear-gradient(180deg,
+    #2f6feb 0%, #2f6feb 33%,
+    #dc143c 33%, #dc143c 66%,
+    #1a1a1a 66%, #1a1a1a 100%
+  );
+}
+
+/* Стеклянный эффект */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+html.dark .glass {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================================
+   Доступность
+   ============================================================ */
+
+/* Фокус для доступности */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Уменьшение движения для пользователей с предпочтением */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   Печать
+   ============================================================ */
+
+@media print {
+  header,
+  footer,
+  button,
+  a {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
